@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ComponentMetadata ComponentId="ctype::Adapter/cname::GoogleDrive/vendor::sap/version::1.0.0" 
+                   ComponentName="GoogleDrive"
+                   UIElementType="Adapter" 
+                   IsExtension="false" 
+                   IsFinal="true" 
+                   IsPreserves="true"
+                   IsDefaultGenerator="true" 
+                   ComponentDisplayName="Google Drive Adapter"
+                   xmlns:gen="http://www.sap.hci.adk.com/gen">
+    
+    <Variant VariantName="Google Drive Receiver"
+             VariantId="ctype::AdapterVariant/cname::GoogleDrive/vendor::sap/tp::sap-googledrive/mp::sap-googledrive/direction::Receiver"
+             IsRequestResponse="true" 
+             MetadataVersion="2.0" 
+             gen:RuntimeComponentBaseUri="sap-googledrive" 
+             AttachmentBehavior="Preserve">
+        
+        <InputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            </Content>
+        </InputContent>
+        
+        <OutputContent Cardinality="1" Scope="outsidepool" MessageCardinality="1" isStreaming="false">
+            <Content>
+                <ContentType>Any</ContentType>
+                <Schema xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            </Content>
+        </OutputContent>
+        
+        <Tab id="connection">
+            <GuiLabels guid="b4c970da-a1f8-443c-b063-046773f93135">
+                <Label language="EN">Connection</Label>
+            </GuiLabels>
+            
+            <AttributeGroup id="authentication">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Authentication</Name>
+                <GuiLabels guid="041a3129-aedb-4e5b-a351-dc8d82ae7fbc">
+                    <Label language="EN">Authentication</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>credentialName</ReferenceName>
+                    <description>Name of the credential stored in SAP CPI Secure Store containing the Google Service Account JSON key</description>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>serviceAccountEmail</ReferenceName>
+                    <description>Email address of the Google Service Account</description>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>applicationName</ReferenceName>
+                    <description>Application name for Google Drive API client</description>
+                </AttributeReference>
+            </AttributeGroup>
+            
+            <AttributeGroup id="operationSettings">
+                <Name xsi:type="xs:string" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Operation Settings</Name>
+                <GuiLabels guid="eaa0dc7f-e350-44ae-85bf-6a7a46853302">
+                    <Label language="EN">Operation Settings</Label>
+                </GuiLabels>
+                <AttributeReference>
+                    <ReferenceName>operation</ReferenceName>
+                    <description>Google Drive operation to perform (upload, download, list, delete)</description>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>folderId</ReferenceName>
+                    <description>Google Drive folder ID (optional, for upload and list operations)</description>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>fileName</ReferenceName>
+                    <description>File name for upload operation (optional, can be set via header)</description>
+                </AttributeReference>
+                <AttributeReference>
+                    <ReferenceName>mimeType</ReferenceName>
+                    <description>MIME type of the file for upload operation</description>
+                </AttributeReference>
+            </AttributeGroup>
+        </Tab>
+    </Variant>
+    
+    <!-- Attribute Metadata Definitions -->
+    
+    <AttributeMetadata>
+        <Name>credentialName</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="239dd7c8-61ce-4ced-8037-437d688257f1">
+            <Label language="EN">Credential Name</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    
+    <AttributeMetadata>
+        <Name>serviceAccountEmail</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="239dd7c8-61ce-4ced-8037-437d688257f2">
+            <Label language="EN">Service Account Email</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    
+    <AttributeMetadata>
+        <Name>applicationName</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>SAP-CPI-Google-Drive-Adapter</Default>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="239dd7c8-61ce-4ced-8037-437d688257f3">
+            <Label language="EN">Application Name</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    
+    <AttributeMetadata>
+        <Name>operation</Name>
+        <Usage>true</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>upload</Default>
+        <Length/>
+        <isparameterized>false</isparameterized>
+        <GuiLabels guid="421138a8-41c6-414b-b3e9-c0c06fbea859">
+            <Label language="EN">Operation</Label>
+        </GuiLabels>
+        <FixedValues>
+            <FixedValue>
+                <Value>upload</Value>
+                <GuiLabels guid="352deeac-432f-45d1-927e-781c5c0289f8">
+                    <Label language="EN">Upload File</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>download</Value>
+                <GuiLabels guid="39ad97f5-1d83-4ff5-a8cf-bdf80ef09bbc">
+                    <Label language="EN">Download File</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>list</Value>
+                <GuiLabels guid="e6c0a878-aeaf-4efa-a759-5e58e2265508">
+                    <Label language="EN">List Files</Label>
+                </GuiLabels>
+            </FixedValue>
+            <FixedValue>
+                <Value>delete</Value>
+                <GuiLabels guid="1c7c4cad-cd9c-4188-9838-5bf8bfa9dbbe">
+                    <Label language="EN">Delete File</Label>
+                </GuiLabels>
+            </FixedValue>
+        </FixedValues>
+    </AttributeMetadata>
+    
+    <AttributeMetadata>
+        <Name>folderId</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="239dd7c8-61ce-4ced-8037-437d688257f4">
+            <Label language="EN">Folder ID</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    
+    <AttributeMetadata>
+        <Name>fileName</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default/>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="239dd7c8-61ce-4ced-8037-437d688257f5">
+            <Label language="EN">File Name</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    
+    <AttributeMetadata>
+        <Name>mimeType</Name>
+        <Usage>false</Usage>
+        <DataType>xsd:string</DataType>
+        <Default>application/octet-stream</Default>
+        <Length/>
+        <isparameterized>true</isparameterized>
+        <GuiLabels guid="239dd7c8-61ce-4ced-8037-437d688257f6">
+            <Label language="EN">MIME Type</Label>
+        </GuiLabels>
+    </AttributeMetadata>
+    
+</ComponentMetadata>

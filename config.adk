@@ -1,0 +1,22 @@
+# Google Drive Adapter Configuration
+# This file contains the adapter configuration parameters for the SAP CPI Google Drive Adapter
+
+# Adapter Information
+adapter.name=GoogleDrive
+adapter.version=1.0.0
+adapter.vendor=sap
+adapter.scheme=sap-googledrive
+
+# Camel Configuration
+camel.version=3.14.7
+
+# Component Class
+component.class=com.sap.adapter.adk.googledrive.GoogleDriveComponent
+
+# Supported Operations
+operations=upload,download,list,delete
+
+# Default Values
+default.operation=upload
+default.mimeType=application/octet-stream
+default.applicationName=SAP-CPI-Google-Drive-Adapter
