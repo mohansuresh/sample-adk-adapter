@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1dfdb54-699f-42b7-9a12-72a697a55e86" name="Changes" comment="[Enhancement] Add high-level architecture diagram and detailed component flow for Dropbox adapter" />
+    <list default="true" id="d1dfdb54-699f-42b7-9a12-72a697a55e86" name="Changes" comment="[Enhancement] Add high-level architecture diagram and detailed component flow for Dropbox adapter">
+      <change afterPath="$PROJECT_DIR$/commit_window.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DROPBOX_ADAPTER_README.md" beforeDir="false" afterPath="$PROJECT_DIR$/reference-adapter/DROPBOX_ADAPTER_README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/QUICK_START_GUIDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/reference-adapter/QUICK_START_GUIDE.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,29 +46,30 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Maven.Sample [install].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/I552914/GitHub/sample-adk-adapter/reference-adapter",
-    "project.structure.last.edited": "Project",
+    "last_opened_file_path": "/Users/I552914/GitHub/sample-adk-adapter",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/reference-adapter" />
       <recent name="$PROJECT_DIR$/reference-adapter/src/main/resources" />
       <recent name="$PROJECT_DIR$/reference-adapter/src/main/java" />
       <recent name="$PROJECT_DIR$/src/main/resources/META-INF/services/org/apache/camel/component" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/reference-adapter/src/main/java/com/sap/it/custom" />
       <recent name="$PROJECT_DIR$/reference-adapter" />
+      <recent name="$PROJECT_DIR$/reference-adapter/src/main/java/com/sap/it/custom" />
     </key>
   </component>
   <component name="TaskManager">
@@ -133,6 +139,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+    </ignored-roots>
     <MESSAGE value="feat: Add initial configuration files for Dropbox adapter integration" />
     <MESSAGE value="[Fix] Update compiler configuration and remove unused annotation processing" />
     <MESSAGE value="[Fix] Update compiler configuration and add quick start guide for Dropbox adapter" />
