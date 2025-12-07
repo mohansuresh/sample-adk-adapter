@@ -5,10 +5,65 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1dfdb54-699f-42b7-9a12-72a697a55e86" name="Changes" comment="[Enhancement] Add high-level architecture diagram and detailed component flow for Dropbox adapter">
-      <change afterPath="$PROJECT_DIR$/commit_window.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GenericAPI_3x/GenericAPI (1).iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GenericAPI_3x/GenericAPI.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GenericAPI_3x/config.adk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GenericAPI_3x/src/main/java/com/sap/adapter/adk/genericapi/GenericAPIComponent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GenericAPI_3x/src/main/java/com/sap/adapter/adk/genericapi/GenericAPIConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GenericAPI_3x/src/main/java/com/sap/adapter/adk/genericapi/GenericAPIEndpoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GenericAPI_3x/src/main/java/com/sap/adapter/adk/genericapi/GenericAPIProducer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GenericAPI_3x/src/main/java/com/sap/adapter/adk/genericapi/conn/AdapterSocketCF.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GenericAPI_3x/src/main/java/com/sap/adapter/adk/genericapi/conn/AdapterSocketNeo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GenericAPI_3x/src/main/java/com/sap/adapter/adk/genericapi/exception/GenericAPIException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GenericAPI_3x/src/main/java/com/sap/adapter/adk/genericapi/factory/AdapterSocketFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GenericAPI_3x/src/main/java/com/sap/adapter/adk/genericapi/httpclient/HttpClientHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GenericAPI_3x/src/main/resources/metadata/metadata.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GenericAPI_3x/src/main/resources/metadata/metadataReceiverV1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GenericAPI_3x/src/test/java/com/sap/adapter/adk/genericapi/GenericAPIComponentTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/GenericAPI_3x/src/test/java/com/sap/adapter/adk/genericapi/httpclient/HttpClientHandlerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/component/adkHttps-1.0.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/config.adk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/lib/adapter.api-2.14.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/lib/generic.api-2.14.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/old-adkHttps-1.0.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/src/main/java/com/sap/adapter/adk/adkhttps/AdkHttpsComponent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/src/main/java/com/sap/adapter/adk/adkhttps/AdkHttpsConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/src/main/java/com/sap/adapter/adk/adkhttps/AdkHttpsConsumerRegistry.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/src/main/java/com/sap/adapter/adk/adkhttps/endpoint/EndpointUriUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/src/main/java/com/sap/adapter/adk/adkhttps/endpoint/HttpSenderAdapterEndpointInfoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/src/main/java/com/sap/adapter/adk/adkhttps/exception/DuplicateConsumerException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/src/main/java/com/sap/adapter/adk/adkhttps/exception/HttpResponseException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/src/main/resources/OSGI-INF/blueprint/beans.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/src/main/resources/WEB-INF/web.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/src/main/resources/metadata/metadata.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/adkHttps_3x/src/test/java/com/sap/adapter/adk/adkhttps/AdkHttpsComponentTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DROPBOX_ADAPTER_README.md" beforeDir="false" afterPath="$PROJECT_DIR$/reference-adapter/DROPBOX_ADAPTER_README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/QUICK_START_GUIDE.md" beforeDir="false" afterPath="$PROJECT_DIR$/reference-adapter/QUICK_START_GUIDE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/DROPBOX_ADAPTER_README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/QUICK_START_GUIDE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/config.adk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/extlibs/commons-codec-1.15.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/extlibs/commons-logging-1.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/extlibs/httpclient-4.5.13.jar" beforeDir="false" afterPath="$PROJECT_DIR$/GenericAPI_3x/extlibs/httpclient-4.5.13.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/extlibs/httpcore-4.4.14.jar" beforeDir="false" afterPath="$PROJECT_DIR$/GenericAPI_3x/extlibs/httpcore-4.4.14.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/GenericAPI_3x/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/src/main/java/com/sap/it/custom/dropbox/DropboxComponent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/src/main/java/com/sap/it/custom/dropbox/DropboxConsumer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/src/main/java/com/sap/it/custom/dropbox/DropboxEndpoint.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/src/main/java/com/sap/it/custom/dropbox/DropboxProducer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/src/main/java/com/sap/it/custom/dropbox/client/DropboxClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/src/main/resources/META-INF/services/org/apache/camel/component/sap-dropbox" beforeDir="false" afterPath="$PROJECT_DIR$/adkHttps_3x/src/main/resources/META-INF/services/org/apache/camel/component/sap-adkHttps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/src/main/resources/metadata/metadata.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/target/Dropbox-1.0.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/target/build/reference-adapter.esa" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/target/classes/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/target/classes/META-INF/services/org/apache/camel/component/sap-dropbox" beforeDir="false" afterPath="$PROJECT_DIR$/GenericAPI_3x/src/main/resources/META-INF/services/org/apache/camel/component/sap-generic" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/target/classes/com/sap/it/custom/dropbox/DropboxComponent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/target/classes/com/sap/it/custom/dropbox/DropboxConsumer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/target/classes/com/sap/it/custom/dropbox/DropboxEndpoint.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/target/classes/com/sap/it/custom/dropbox/DropboxProducer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/target/classes/com/sap/it/custom/dropbox/client/DropboxClient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference-adapter/target/classes/metadata/metadata.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +104,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",

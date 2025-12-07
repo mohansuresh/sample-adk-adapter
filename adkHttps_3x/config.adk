@@ -1,0 +1,7 @@
+#Properties file
+#Thu Feb 01 08:08:13 IST 2018
+Adapter-Name=adkHttps
+Enable-Maven=true
+Adapter-Vendor=sap
+Adapter-ID=adkHttps
+Adapter-Version=1.0.0

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>adkHttps</groupId>
+    <artifactId>adkHttps</artifactId>
+    <version>1.0.0</version>
+    <packaging>bundle</packaging>
+    <name>${project.groupId}.${project.artifactId}</name>
+
+    <properties>
+        <camel.version>3.14.7</camel.version>
+        <servlet.api.version>4.0.2</servlet.api.version>
+    </properties>
+
+    <dependencies>
+        <!-- Check for the latest version of this artifact in central maven repository -->
+        <dependency>
+            <groupId>com.sap.cloud.adk</groupId>
+            <artifactId>com.sap.cloud.adk.build.archive</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel.karaf</groupId>
+            <artifactId>camel-blueprint</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <!-- New dependency required for servlet -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-servlet</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>${servlet.api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-http-common</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-support</artifactId>
+            <scope>provided</scope>
+            <version>${camel.version}</version>
+        </dependency>
+
+        <!-- testing -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test</artifactId>
+            <version>${camel.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.33</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.33</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- public api -->
+        <dependency>
+            <groupId>com.sap.it.public</groupId>
+            <artifactId>adapter.api</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/adapter.api-2.14.0.jar</systemPath>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.sap.it.public</groupId>
+            <artifactId>generic.api</artifactId>
+            <version>LATEST</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/generic.api-2.14.0.jar</systemPath>
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <defaultGoal>install</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>3.5.0</version>
+                <extensions>true</extensions>
+
+                <configuration>
+                    <excludeDependencies>true</excludeDependencies>
+                    <instructions>
+                        <Web-ContextPath>/adkHttps</Web-ContextPath>
+                        <Export-Service>com.sap.it.api.adapter.monitoring.AdapterEndpointInformationService</Export-Service>
+                        <Import-Package>com.sap.it.api.asdk.cloud.authentication,org.apache.camel.support,org.apache.camel,org.apache.camel.component.servlet,org.apache.camel.http.common,org.apache.camel.impl,*</Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/libs</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                            <excludeTransitive>true</excludeTransitive>
+
+                            <!-- Specify the artifacts to be excluded in the dependencies -->
+                            <excludeArtifactIds/>
+
+                            <!-- Specify the group ids to be excluded in the dependencies -->
+                            <excludeGroupIds>com.sap.cloud.adk,org.apache.camel,org.slf4j,log4j,com.sap.it.public,jakarta.servlet</excludeGroupIds>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.sap.cloud.adk</groupId>
+                <artifactId>com.sap.cloud.adk.build.archive</artifactId>
+                <version>2.3.0</version>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.sap.cloud.adk</groupId>
+                    <artifactId>com.sap.cloud.adk.build.archive</artifactId>
+                    <executions>
+                        <execution>
+                            <id>build-adapter</id>
+                            <phase>install</phase>
+                            <goals>
+                                <goal>build</goal>
+                            </goals>
+                            <configuration>
+                                <adapterProjectDirectory>${project.basedir}</adapterProjectDirectory>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
