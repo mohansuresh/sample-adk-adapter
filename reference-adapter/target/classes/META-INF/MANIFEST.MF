@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1765071231019
+Bnd-LastModified: 1765073975070
 Build-Jdk: 17.0.14
 Built-By: I552914
 Bundle-Classpath: .,httpclient-4.5.13.jar,httpcore-4.4.14.jar,commons-lo
