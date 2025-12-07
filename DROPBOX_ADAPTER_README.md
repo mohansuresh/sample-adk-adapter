@@ -39,6 +39,107 @@ This custom adapter enables seamless integration between SAP Cloud Platform Inte
 
 ## Architecture
 
+### High-Level Architecture Diagram
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         SAP Cloud Platform Integration                       │
+│                                                                               │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │                        Integration Flow                              │   │
+│  │                                                                       │   │
+│  │  ┌──────────────┐         ┌──────────────┐         ┌─────────────┐ │   │
+│  │  │   Sender     │────────▶│   Content    │────────▶│  Receiver   │ │   │
+│  │  │   Adapter    │         │   Modifier   │         │   Adapter   │ │   │
+│  │  │  (Inbound)   │         │              │         │  (Outbound) │ │   │
+│  │  └──────┬───────┘         └──────────────┘         └──────┬──────┘ │   │
+│  │         │                                                   │        │   │
+│  └─────────┼───────────────────────────────────────────────────┼────────┘   │
+│            │                                                   │            │
+│            │                                                   │            │
+│  ┌─────────▼───────────────────────────────────────────────────▼────────┐   │
+│  │                    Dropbox Custom Adapter (ADK)                      │   │
+│  │                                                                       │   │
+│  │  ┌─────────────────────────────────────────────────────────────┐    │   │
+│  │  │              Apache Camel Component Layer                   │    │   │
+│  │  │                                                               │    │   │
+│  │  │  ┌──────────────────┐         ┌──────────────────┐          │    │   │
+│  │  │  │ DropboxComponent │────────▶│ DropboxEndpoint  │          │    │   │
+│  │  │  │                  │         │                  │          │    │   │
+│  │  │  │ - createEndpoint │         │ - Configuration  │          │    │   │
+│  │  │  │ - setProperties  │         │ - Parameters     │          │    │   │
+│  │  │  └──────────────────┘         └────────┬─────────┘          │    │   │
+│  │  │                                        │                     │    │   │
+│  │  │                          ┌─────────────┴─────────────┐      │    │   │
+│  │  │                          │                           │      │    │   │
+│  │  │                ┌─────────▼─────────┐   ┌────────────▼──────┐    │   │
+│  │  │                │ DropboxConsumer   │   │  DropboxProducer  │    │   │
+│  │  │                │   (Sender Mode)   │   │  (Receiver Mode)  │    │   │
+│  │  │                │                   │   │                   │    │   │
+│  │  │                │ - poll()          │   │ - process()       │    │   │
+│  │  │                │ - download files  │   │ - 14 operations   │    │   │
+│  │  │                │ - post-process    │   │ - dynamic config  │    │   │
+│  │  │                │ - scheduler       │   │ - header support  │    │   │
+│  │  │                └─────────┬─────────┘   └────────────┬──────┘    │   │
+│  │  │                          │                          │           │    │
+│  │  └──────────────────────────┼──────────────────────────┼───────────┘    │
+│  │                             │                          │                │
+│  │                             └──────────┬───────────────┘                │
+│  │                                        │                                │
+│  │  ┌─────────────────────────────────────▼──────────────────────────┐    │
+│  │  │                    DropboxClient (HTTP Layer)                  │    │
+│  │  │                                                                 │    │
+│  │  │  - OAuth2 Authentication (via SAP Secure Store)                │    │
+│  │  │  - executeApiCall() - Regular API operations                   │    │
+│  │  │  - executeContentApiCall() - Content upload/download           │    │
+│  │  │  - Error handling & logging                                    │    │
+│  │  │  - Apache HttpClient 4.5.13                                    │    │
+│  │  └─────────────────────────────────────┬───────────────────────────┘    │
+│  │                                        │                                │
+│  └────────────────────────────────────────┼────────────────────────────────┘
+│                                           │                                 │
+│  ┌────────────────────────────────────────▼────────────────────────────┐   │
+│  │                    SAP Security Material                            │   │
+│  │                                                                      │   │
+│  │  ┌────────────────────────────────────────────────────────────┐    │   │
+│  │  │  User Credentials (OAuth2 Token Storage)                   │    │   │
+│  │  │  - Credential Name: dropbox_oauth                          │    │   │
+│  │  │  - Password: OAuth2 Access Token                           │    │   │
+│  │  └────────────────────────────────────────────────────────────┘    │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+└───────────────────────────────────────┬─────────────────────────────────────┘
+                                        │
+                                        │ HTTPS (OAuth2)
+                                        │
+┌───────────────────────────────────────▼─────────────────────────────────────┐
+│                            Dropbox API v2                                    │
+│                                                                               │
+│  ┌─────────────────────────────────┐    ┌──────────────────────────────┐   │
+│  │  API Endpoint                   │    │  Content Endpoint            │   │
+│  │  https://api.dropboxapi.com/2   │    │  https://content.dropbox...  │   │
+│  │                                  │    │                              │   │
+│  │  - files/list_folder            │    │  - files/upload              │   │
+│  │  - files/search                 │    │  - files/download            │   │
+│  │  - files/get_metadata           │    │  - files/download_zip        │   │
+│  │  - files/copy_v2                │    │                              │   │
+│  │  - files/move_v2                │    │                              │   │
+│  │  - files/delete_v2              │    │                              │   │
+│  │  - files/create_folder_v2       │    │                              │   │
+│  │  - files/get_temporary_link     │    │                              │   │
+│  │  - users/get_space_usage        │    │                              │   │
+│  │  - files/list_revisions         │    │                              │   │
+│  │  - file_properties/...          │    │                              │   │
+│  └─────────────────────────────────┘    └──────────────────────────────┘   │
+│                                                                               │
+│  ┌───────────────────────────────────────────────────────────────────────┐  │
+│  │                        Dropbox Storage                                │  │
+│  │  - Files and Folders                                                  │  │
+│  │  - Metadata and Properties                                            │  │
+│  │  - Revision History                                                   │  │
+│  └───────────────────────────────────────────────────────────────────────┘  │
+└───────────────────────────────────────────────────────────────────────────────┘
+```
+
 ### Component Structure
 
 ```
@@ -65,6 +166,158 @@ reference-adapter/
             │   └── metadata.xml               # SAP CPI UI metadata
             └── META-INF/services/org/apache/camel/component/
                 └── sap-dropbox                # Component registration
+```
+
+### Detailed Component Flow
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          SENDER ADAPTER FLOW                                 │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+1. Scheduler triggers poll
+         │
+         ▼
+2. DropboxConsumer.poll()
+         │
+         ├──▶ Read configuration (filePath/folderPath, operation)
+         │
+         ├──▶ DropboxClient.executeContentApiCall()
+         │         │
+         │         ├──▶ Retrieve OAuth2 token from SAP Secure Store
+         │         │
+         │         ├──▶ HTTP POST to Dropbox Content API
+         │         │    (https://content.dropboxapi.com/2/files/download)
+         │         │
+         │         └──▶ Return file content + metadata
+         │
+         ├──▶ Create Camel Exchange with file content
+         │
+         ├──▶ Process message through integration flow
+         │
+         └──▶ Post-Processing
+                  │
+                  ├──▶ Delete: Remove file from Dropbox
+                  ├──▶ Archive: Move file to archive directory
+                  ├──▶ KeepAndProcess: No action (process again next poll)
+                  └──▶ KeepAndMark: Mark as processed (idempotent)
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         RECEIVER ADAPTER FLOW                                │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+1. Integration flow sends message
+         │
+         ▼
+2. DropboxProducer.process(Exchange)
+         │
+         ├──▶ Read configuration & headers (operation, paths, parameters)
+         │
+         ├──▶ Determine operation type (14 operations supported)
+         │
+         ├──▶ Build API request
+         │         │
+         │         ├──▶ For Upload/Download: Use Content API
+         │         └──▶ For Others: Use Regular API
+         │
+         ├──▶ DropboxClient.executeApiCall() / executeContentApiCall()
+         │         │
+         │         ├──▶ Retrieve OAuth2 token from SAP Secure Store
+         │         │
+         │         ├──▶ HTTP POST to Dropbox API
+         │         │    - API: https://api.dropboxapi.com/2/...
+         │         │    - Content: https://content.dropboxapi.com/2/...
+         │         │
+         │         └──▶ Return response (JSON/XML or binary content)
+         │
+         ├──▶ Process response
+         │         │
+         │         ├──▶ Set response headers (status, metadata)
+         │         └──▶ Set message body (response data)
+         │
+         └──▶ Return to integration flow
+```
+
+### Data Flow Diagram
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                            DATA FLOW                                         │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+SENDER (Inbound):
+┌──────────┐    ┌──────────────┐    ┌─────────────┐    ┌──────────────┐
+│ Dropbox  │───▶│   Dropbox    │───▶│   Camel     │───▶│ Integration  │
+│ Storage  │    │   Consumer   │    │  Exchange   │    │    Flow      │
+└──────────┘    └──────────────┘    └─────────────┘    └──────────────┘
+   (File)         (Poll & Get)        (Message)          (Process)
+                       │
+                       ▼
+                 Post-Process
+                 (Delete/Archive/
+                  Keep/Mark)
+
+
+RECEIVER (Outbound):
+┌──────────────┐    ┌─────────────┐    ┌──────────────┐    ┌──────────┐
+│ Integration  │───▶│   Camel     │───▶│   Dropbox    │───▶│ Dropbox  │
+│    Flow      │    │  Exchange   │    │   Producer   │    │ Storage  │
+└──────────────┘    └─────────────┘    └──────────────┘    └──────────┘
+  (Trigger)           (Message)          (Execute Op)        (Result)
+                                              │
+                                              ▼
+                                        14 Operations:
+                                        - Upload
+                                        - Download
+                                        - Copy/Move/Delete
+                                        - Create Folder
+                                        - List/Search
+                                        - Metadata Ops
+                                        - etc.
+```
+
+### Authentication Flow
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        OAUTH2 AUTHENTICATION FLOW                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+1. Adapter Initialization
+         │
+         ▼
+2. DropboxClient Constructor
+         │
+         ├──▶ Call retrieveAccessToken(credentialName)
+         │
+         ├──▶ ITApiFactory.getService(SecureStoreService.class)
+         │
+         ├──▶ secureStoreService.getUserCredential(credentialName)
+         │         │
+         │         └──▶ Returns UserCredential object
+         │
+         ├──▶ Extract password field (contains OAuth2 token)
+         │
+         └──▶ Store token for API calls
+
+3. API Call Execution
+         │
+         ├──▶ Set Authorization header: "Bearer <token>"
+         │
+         ├──▶ Execute HTTP request to Dropbox API
+         │
+         └──▶ Dropbox validates token and processes request
+
+
+Configuration in SAP CPI Security Material:
+┌────────────────────────────────────────┐
+│  User Credential                       │
+│  ─────────────────                     │
+│  Name: dropbox_oauth                   │
+│  User: dropbox (any value)             │
+│  Password: dbtk_xxxxx... (OAuth token) │
+└────────────────────────────────────────┘
 ```
 
 ### Key Classes
