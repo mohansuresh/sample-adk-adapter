@@ -1,0 +1,5 @@
+Adapter-Name=Dropbox
+Enable-Maven=true
+Adapter-Vendor=sap
+Adapter-ID=Dropbox
+Adapter-Version=1.0.0
