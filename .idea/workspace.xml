@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d1dfdb54-699f-42b7-9a12-72a697a55e86" name="Changes" comment="[Fix] Update compiler configuration and add quick start guide for Dropbox adapter">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DROPBOX_ADAPTER_README.md" beforeDir="false" afterPath="$PROJECT_DIR$/DROPBOX_ADAPTER_README.md" afterDir="false" />
-    </list>
+    <list default="true" id="d1dfdb54-699f-42b7-9a12-72a697a55e86" name="Changes" comment="[Enhancement] Add high-level architecture diagram and detailed component flow for Dropbox adapter" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -101,7 +98,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765075561263</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="[Enhancement] Add high-level architecture diagram and detailed component flow for Dropbox adapter">
+      <option name="closed" value="true" />
+      <created>1765081455800</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1765081455800</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -131,7 +136,8 @@
     <MESSAGE value="feat: Add initial configuration files for Dropbox adapter integration" />
     <MESSAGE value="[Fix] Update compiler configuration and remove unused annotation processing" />
     <MESSAGE value="[Fix] Update compiler configuration and add quick start guide for Dropbox adapter" />
-    <option name="LAST_COMMIT_MESSAGE" value="[Fix] Update compiler configuration and add quick start guide for Dropbox adapter" />
+    <MESSAGE value="[Enhancement] Add high-level architecture diagram and detailed component flow for Dropbox adapter" />
+    <option name="LAST_COMMIT_MESSAGE" value="[Enhancement] Add high-level architecture diagram and detailed component flow for Dropbox adapter" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
